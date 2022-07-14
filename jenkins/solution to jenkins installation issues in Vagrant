@@ -1,0 +1,33 @@
+If you experince this errors while installing Jenkins on vagrant Ubuntu 18.04
+
+"The package 'jenkins' has no installation candidate ubuntu 18.04"
+## DO THIS 
+
+-install Java 
+  -$sudo apt-get install openjdk-11-jdk-headless
+  - verify installation  $java --version 
+        $openjdk 11.0.15 2022-04-19
+        OpenJDK Runtime Environment (build 11.0.15+10-Ubuntu-0ubuntu0.18.04.1)
+        OpenJDK 64-Bit Server VM (build 11.0.15+10-Ubuntu-0ubuntu0.18.04.1, mixed mode, sharing)
+  ##SET JAVA_HOME environment variable 
+  - $sudo echo "JAVA_HOME=\"/usr/lib/jvm/java-11-openjdk-amd64\"" >> /etc/profile
+  - $source /etc/profile
+  ### INSTALL JENKINS 
+  $ curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee \
+    /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+  $ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    https://pkg.jenkins.io/debian binary/ | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+  $ sudo apt-get update
+  $ sudo apt-get install jenkins
+  
+   ## After installation jenkins.service fails to start to eliminate all this bottlenecks do the following 
+
+ Run $systemctl status jenkins ## copy the jenkins.service path
+ $ vi /lib/systemd/system/jenkins.service ##edit this line Environment="JENKINS_PORT=8080" ##change it to 8090 or any other port number
+ $ systemctl daemon-reload
+ $ systemctl restart jenkins
+ $systemctl status jenkins ## should run successfully 
+ 
+  
+  
