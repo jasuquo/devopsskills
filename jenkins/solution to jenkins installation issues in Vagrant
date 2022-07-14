@@ -28,7 +28,7 @@ If you experince this errors while installing Jenkins on vagrant Ubuntu 18.04
  $ vi /lib/systemd/system/jenkins.service ##edit this line Environment="JENKINS_PORT=8080" ##change it to 8090 or any other port number
  $ systemctl daemon-reload
  $ systemctl restart jenkins
- $systemctl status jenkins ## should run successfully 
+ $systemctl status jenkins ## jenkins should run now  successfully 
  
   
   
